@@ -22,7 +22,9 @@ namespace RetaurantBooking
 
             
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-            builder.Services.AddScoped<ICustomerServiceRepository, CustomerServiceRepository>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
+           builder.Services.AddScoped<ITableRepository, TablesRepository>();
+            builder.Services.AddScoped<ITableService, TableService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

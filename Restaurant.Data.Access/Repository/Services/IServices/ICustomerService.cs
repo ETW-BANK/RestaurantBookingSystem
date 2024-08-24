@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Data.Access.Repository.Services.IServices
 {
-    public interface ICustomerServiceRepository
+    public interface ICustomerService
     {
 
         Task AddItemAsync(CustomerDto item);

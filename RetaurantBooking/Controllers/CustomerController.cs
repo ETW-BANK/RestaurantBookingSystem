@@ -9,8 +9,8 @@ namespace RetaurantBooking.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomerServiceRepository _customerService;
-        public CustomerController(ICustomerServiceRepository customerService)
+        private readonly ICustomerService _customerService;
+        public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
         }

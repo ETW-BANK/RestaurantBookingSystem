@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Data.Access.Repository.Services
 {
-    public class CustomerServiceRepository : ICustomerServiceRepository
+    public class CustomerService : ICustomerService
 
     {
         private readonly ICustomerRepository _customerRepo;
 
-        public CustomerServiceRepository(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepo = customerRepository;
         }

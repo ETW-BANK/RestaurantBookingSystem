@@ -9,13 +9,12 @@ namespace Restaurant.Models.DTOs
 {
     public class BookingDto
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        public DateTime BookingDate { get; set; } = DateTime.Now;
-
+        public DateTime BookingDate { get; set; }
         public int NumberOfGuests { get; set; }
+        public int CustomerId { get; set; }
+        public int TablesId { get; set; }
+        public int? FoodMenuId { get; set; }
 
     }
 }
