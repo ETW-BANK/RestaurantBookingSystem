@@ -16,6 +16,7 @@ namespace Restaurant.Models.DTOs
   
         public string Title { get; set; }
 
+        public double price { get; set; }   
       
         public bool IsAvailable { get; set; }
 

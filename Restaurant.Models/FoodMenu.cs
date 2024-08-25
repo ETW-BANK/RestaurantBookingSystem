@@ -16,6 +16,8 @@ namespace Restaurant.Models
         [Required]
         public string Title { get; set; }
 
+        public double Price { get; set; }   
+
         [Required]  
         public bool IsAvailable { get; set; }  
 

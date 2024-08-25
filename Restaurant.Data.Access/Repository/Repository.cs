@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Restaurant.Data.Access.Repository
 {
@@ -21,20 +22,14 @@ namespace Restaurant.Data.Access.Repository
             _context = context;
             this.dbSet = _context.Set<T>();
         }
-        public async Task AddItemAsync(T item)
+        public async Task AddItemAsync(T item, params Expression<Func<T, object>>[] includes)
         {
             await dbSet.AddAsync(item);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            IQueryable<T> query = dbSet;
+        
 
-            return await query.ToListAsync();
-
-        }
-
-        public async Task<IEnumerable<T>> GetAllBookingAsync(params Expression<Func<T, object>>[] includes)
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] ?includes)
         {
             IQueryable<T> query = dbSet;
 
@@ -46,11 +41,13 @@ namespace Restaurant.Data.Access.Repository
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetSingleAsync(int id)
+        public async Task<T> GetSingleAsync(int id, params Expression<Func<T, object>>[] includes)
         {
 
 
             T entity = await dbSet.FindAsync(id);
+
+          
 
             return entity;
 

@@ -9,13 +9,13 @@ namespace Restaurant.Data.Access.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        Task AddItemAsync(T item);
+        Task AddItemAsync(T item, params Expression<Func<T, object>>[] includes);
 
-        Task <T> GetSingleAsync(int id);
+        Task <T> GetSingleAsync(int id, params Expression<Func<T, object>>[] includes);
 
-        Task<IEnumerable<T>> GetAllAsync();
+       
 
-        Task<IEnumerable<T>> GetAllBookingAsync(params Expression<Func<T, object>>[] includes);
+        Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
         Task RemoveAsync(int id);
       
         Task SaveAsync();

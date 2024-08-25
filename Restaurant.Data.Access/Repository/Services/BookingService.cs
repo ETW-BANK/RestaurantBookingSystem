@@ -14,75 +14,23 @@ public class BookingService : IBookingService
         _bookingRepo = bookingRepo;
     }
 
-    public async Task<ServiceResponse<string>> AddItemAsync(BookingDto item)
+    public Task<ServiceResponse<string>> AddItemAsync(BookingDto item, params Expression<Func<Booking, object>>[]? includes)
     {
-        var response = new ServiceResponse<string>();
-
-        try
-        {
-            var booking = new Booking
-            {
-                // Map properties from BookingDto to Booking
-                // e.g., Id = item.Id, etc.
-            };
-
-            await _bookingRepo.AddItemAsync(booking);
-            await _bookingRepo.SaveAsync();
-
-            response.Data = "Booking added successfully!";
-            response.Success = true;
-        }
-        catch (Exception ex)
-        {
-            response.Success = false;
-            response.Message = ex.Message;
-        }
-
-        return response;
-    }
-
-    public async Task<ServiceResponse<BookingDto>> GetSingleAsync(int id)
-    {
-        var response = new ServiceResponse<BookingDto>();
-
-        try
-        {
-            var booking = await _bookingRepo.GetSingleAsync(id);
-
-            if (booking != null)
-            {
-                response.Data = new BookingDto
-                {
-                    // Map properties from Booking to BookingDto
-                };
-                response.Success = true;
-            }
-            else
-            {
-                response.Success = false;
-                response.Message = "Booking not found.";
-            }
-        }
-        catch (Exception ex)
-        {
-            response.Success = false;
-            response.Message = ex.Message;
-        }
-
-        return response;
+        throw new NotImplementedException();
     }
 
    
 
-    public async Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllbookingAsync(params Expression<Func<Booking, object>>[] includes)
+    public async Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllAsync(params Expression<Func<Booking, object>>[] includes)
     {
         var response = new ServiceResponse<IEnumerable<BookingDto>>();
 
         try
         {
-            var bookingList = await _bookingRepo.GetAllBookingAsync(b => b.Customer,
-                b => b.Tables,
-                b => b.FoodMenu);
+            var bookingList = await _bookingRepo.GetAllAsync( b => b.Customer,
+        b => b.Tables,
+        b => b.FoodMenu);
+               
 
             if (bookingList != null && bookingList.Any())
             {
@@ -133,6 +81,11 @@ public class BookingService : IBookingService
         }
 
         return response;
+    }
+
+    public Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[]? includes)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<bool>> RemoveAsync(int id)

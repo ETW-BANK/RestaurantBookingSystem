@@ -30,6 +30,7 @@ namespace Restaurant.Data.Access.Repository.Services
                 {
                     Id = item.Id,
                     Title = item.Title,
+                    Price=item.price,
                     ImageUrl = item.ImageUrl,
                     IsAvailable = item.IsAvailable,
                 };
@@ -66,6 +67,7 @@ namespace Restaurant.Data.Access.Repository.Services
                     {
                         Id = u.Id,
                         Title = u.Title,
+                        price = u.Price,    
                         ImageUrl = u.ImageUrl,
                         IsAvailable = u.IsAvailable,
                     }).ToList();
@@ -104,6 +106,7 @@ namespace Restaurant.Data.Access.Repository.Services
                     {
                         Id = menue.Id,
                         Title = menue.Title,
+                        price=menue.Price,
                         ImageUrl = menue.ImageUrl,
                         IsAvailable = menue.IsAvailable,
                     };
@@ -170,6 +173,7 @@ namespace Restaurant.Data.Access.Repository.Services
                 {
                     existingmenue.Id = table.Id;
                     existingmenue.Title = table.Title;
+                    existingmenue.Price = table.price;
                     existingmenue.ImageUrl = table.ImageUrl;
                     existingmenue.IsAvailable = table.IsAvailable;
 

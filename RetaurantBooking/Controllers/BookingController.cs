@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.Data.Access.Repository.Services.IServices;
+using Restaurant.Models;
 using Restaurant.Models.DTOs;
 using Restaurant.Utility;
 
@@ -34,7 +35,7 @@ namespace RetaurantBooking.Controllers
         [Route("GetAllBookings")]
         public async Task<IActionResult> GetAllBookings()
         {
-            var result = await _bookingService.GetAllbookingAsync();
+            var result = await _bookingService.GetAllAsync();
 
             if (!result.Success )
             {
