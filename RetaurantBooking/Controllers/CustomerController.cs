@@ -19,7 +19,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpGet]
-        [Route("GetOneUser")]
+        [Route("GetSingleCustomer")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             var result = await _customerService.GetSingleAsync(id);
@@ -45,7 +45,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpPost]
-        [Route("Create Customer")]
+        [Route("CreateCustomer")]
 
         public async Task<IActionResult> CreateNweCustomer([FromQuery] CustomerDto customer)
         {
@@ -67,7 +67,7 @@ namespace RetaurantBooking.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateUser")]
+        [Route("UpdateCustomer")]
         public async Task<IActionResult> Update([FromQuery] CustomerDto customer)
         {
 

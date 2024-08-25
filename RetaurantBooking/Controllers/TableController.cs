@@ -17,7 +17,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpGet]
-        [Route("GetOneTable")]
+        [Route("GetSingleTable")]
         public async Task<IActionResult> GetTable(int id)
         {
             var result = await _tableService.GetSingleAsync(id);
@@ -44,7 +44,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpPost]
-        [Route("Create Table")]
+        [Route("CreateTable")]
 
         public async Task<IActionResult> CreateTable([FromQuery] TablesDto table)
         {
