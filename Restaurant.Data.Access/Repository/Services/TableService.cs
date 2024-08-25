@@ -2,6 +2,7 @@
 using Restaurant.Data.Access.Repository.Services.IServices;
 using Restaurant.Models;
 using Restaurant.Models.DTOs;
+using Restaurant.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,11 +94,17 @@ namespace Restaurant.Data.Access.Repository.Services
             {
                 existingtable.TableNumber = table.TableNumber;
                 existingtable.NumberOfSeats = table.NumberOfSeats;  
-                existingtable.isAvialable= table.isAvialable;   
+                existingtable.isAvialable= table.isAvialable; 
+                
+              
+            }
+            else
+            {
+
             }
 
            await _tablerepo.UpdateTableAsync(existingtable);
-
+           
         }
     }
 }

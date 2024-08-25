@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.Data.Access.Repository.Services.IServices;
 using Restaurant.Models.DTOs;
+using Restaurant.Utility;
 
 namespace RetaurantBooking.Controllers
 {
@@ -20,24 +22,25 @@ namespace RetaurantBooking.Controllers
         [Route("GetOneUser")]
         public async Task<IActionResult> GetCustomer(int id)
         {
-            var customerDto = await _customerService.GetSingleAsync(id);
-            if (customerDto == null)
+            var result = await _customerService.GetSingleAsync(id);
+            if (!result.Success)
             {
-                return NotFound("user Dosnt Exist");
+                return NotFound(result.Message);
             }
-            return Ok(customerDto);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("GetAllCustomers")]
         public async Task<IActionResult> GetAllCustomers()
         {
-            var customerDto = await _customerService.GetAllAsync();
-            if (customerDto == null)
+            var result = await _customerService.GetAllAsync();
+
+            if (!result.Success )
             {
-                return NotFound("No Customer Found");
+                return BadRequest(result.Message);
             }
-            return Ok(customerDto);
+            return Ok(result);
         }
 
 
@@ -46,30 +49,38 @@ namespace RetaurantBooking.Controllers
 
         public async Task<IActionResult> CreateNweCustomer([FromQuery] CustomerDto customer)
         {
-            await _customerService.AddItemAsync(customer);
+      
+            var response = await _customerService.AddItemAsync(customer);
+
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+            return Ok(response.Message);
+
+          
             
-            return Ok("user Created Succesfully");
+            
+            
+            
         }
 
         [HttpPut]
         [Route("UpdateUser")]
-
         public async Task<IActionResult> Update([FromQuery] CustomerDto customer)
-
         {
 
-            var result=await _customerService.GetSingleAsync(customer.Id);   
+            var result = await _customerService.UpdateCustomerAsync(customer);
 
-          if (result== null)
+            if (!result.Success)
             {
-                return NotFound("Customer Not Found");
+
+                return NotFound(result.Message);
             }
+           
 
-             await _customerService.UpdateCustomerAsync(customer);
-            
-
-            return Ok("Customer Updated SuccessFully");
-
+            return Ok(result.Message);
         }
 
         [HttpDelete]
@@ -79,10 +90,14 @@ namespace RetaurantBooking.Controllers
 
         {
 
-            await _customerService.RemoveAsync(id); 
+           var result= await _customerService.RemoveAsync(id);
 
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
 
-            return Ok("User Deleted Successfully");
+            return Ok(result.Message);
 
         }
     }

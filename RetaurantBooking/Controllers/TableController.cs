@@ -23,7 +23,7 @@ namespace RetaurantBooking.Controllers
             var tableDto = await _tableService.GetSingleAsync(id);
             if (tableDto == null)
             {
-                return NotFound("user Dosnt Exist");
+                return NotFound("user Dosn't Exist");
             }
             return Ok(tableDto);
         }
