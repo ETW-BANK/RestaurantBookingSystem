@@ -1,4 +1,5 @@
-﻿using Restaurant.Data.Access.Repository.IRepository;
+﻿using Microsoft.AspNetCore.Mvc;
+using Restaurant.Data.Access.Repository.IRepository;
 using Restaurant.Data.Access.Repository.Services.IServices;
 using Restaurant.Models;
 using Restaurant.Models.DTOs;
@@ -6,6 +7,7 @@ using Restaurant.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,91 +22,187 @@ namespace Restaurant.Data.Access.Repository.Services
         {
             _tablerepo = tablerepo;
         }
-        public async Task AddItemAsync(TablesDto item)
+
+        public async Task<ServiceResponse<string>> AddItemAsync(TablesDto item)
         {
-            var table = new Tables
+            var response = new ServiceResponse<string>();
+
+            try
             {
-                Id = item.Id,
-                NumberOfSeats = item.NumberOfSeats,
-                TableNumber = item.TableNumber,
-                isAvialable=item.isAvialable,
-
-
-            };
-            await _tablerepo.AddItemAsync(table);
-            await _tablerepo.SaveAsync();
-        }
-
-        public async Task<IEnumerable<TablesDto>> GetAllAsync()
-        {
-             var tableList=await _tablerepo.GetAllAsync();  
-
-             if (tableList != null)
-             {
-                return tableList.Select(x => new TablesDto
-
+                var newtable = new Tables
                 {
-                    Id = x.Id,
-                    TableNumber = x.TableNumber,
-                    NumberOfSeats= x.NumberOfSeats,
-                    isAvialable= x.isAvialable
-                }).ToList();
-
-                
-            }
-            return new List<TablesDto>();
-
-        }
-
-        public async Task<TablesDto> GetSingleAsync(int id)
-        {
-         var table= await _tablerepo.GetSingleAsync(id);    
-
-            if (table != null)
-            {
-                return new TablesDto
-                {
-                    Id = table.Id,
-                    TableNumber= table.TableNumber,
-                    NumberOfSeats= table.NumberOfSeats,
-                    isAvialable = table.isAvialable
-
+                    Id = item.Id,
+                    NumberOfSeats = item.NumberOfSeats,
+                    TableNumber = item.TableNumber,
+                    isAvialable = item.isAvialable
                 };
-               
+                await _tablerepo.AddItemAsync(newtable);
+                await _tablerepo.SaveAsync();
+                response.Success = true;
+                response.Message = Messages.TableSucces;
+
             }
-            return null;
+            catch
+            {
+                response.Success = false;
+                response.Message = Messages.TableFailed;
+            }
+
+            return response;
+
         }
 
-        public async Task RemoveAsync(int id)
+        public async Task<ServiceResponse<IEnumerable<TablesDto>>> GetAllAsync()
         {
-            var result = await _tablerepo.GetSingleAsync(id);
+            var response = new ServiceResponse<IEnumerable<TablesDto>>();
 
-            if(result != null)
+            try
             {
-             await _tablerepo.RemoveAsync(id);
-            }
-            await _tablerepo.SaveAsync();
-        }
+              var tables=  await _tablerepo.GetAllAsync();
 
-        public async Task UpdateTableAsync(TablesDto table)
-        {
-            Tables existingtable = await _tablerepo.GetSingleAsync(table.Id);
+                if (tables != null)
+                {
+                    var tableList = tables.Select(u => new TablesDto
+                    {
+                        Id = u.Id,
+                        TableNumber = u.TableNumber,
+                        NumberOfSeats = u.NumberOfSeats,
+                        isAvialable = u.isAvialable
+                    }).ToList();
 
-            if (existingtable != null)
-            {
-                existingtable.TableNumber = table.TableNumber;
-                existingtable.NumberOfSeats = table.NumberOfSeats;  
-                existingtable.isAvialable= table.isAvialable; 
-                
+                    response.Data = tableList;
+                    response.Success = true;
+
+                }
+                else
+                {
+
+                    response.Success = false;
+                    response.Message = Messages.NoData;
+                }
+
               
             }
-            else
+            catch
             {
-
+                response.Success = false;
+                response.Message = Messages.NoData;
+                response.Data = Enumerable.Empty<TablesDto>();
             }
 
-           await _tablerepo.UpdateTableAsync(existingtable);
-           
+            return response;
+        }
+
+        public async Task<ServiceResponse<TablesDto>> GetSingleAsync(int id)
+        {
+            var response = new ServiceResponse<TablesDto>();
+            try
+            {
+                var tabel= await _tablerepo.GetSingleAsync(id);    
+
+                if (tabel != null)
+                {
+                    var tables = new TablesDto
+                    {
+                        Id = tabel.Id,
+                        TableNumber = tabel.TableNumber,
+                        NumberOfSeats = tabel.NumberOfSeats,
+                        isAvialable = tabel.isAvialable
+                    };
+
+                    response.Data=tables;    
+                    response.Success = true;
+                    response.Message = Messages.TableSucces;
+
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = Messages.NoData;
+                }
+
+            }
+            catch
+            {
+                response.Success= false;
+                response.Message = Messages.NoData;
+                
+            }
+
+            return response;
+        }
+
+        public async Task<ServiceResponse<bool>> RemoveAsync(int id)
+        {
+            var response = new ServiceResponse<bool>();
+
+            try
+            {
+                var table = await _tablerepo.GetSingleAsync(id);
+
+                if(table != null)
+                {
+                    await _tablerepo.RemoveAsync(id);
+                    await _tablerepo.SaveAsync();
+                    response.Data = true;
+                    response.Success = true;
+                    response.Message = Messages.DataDelete;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = Messages.DFailDelete;
+                }
+
+            }
+            catch
+            {
+                response.Success= false;
+                response.Message = Messages.DFailDelete;
+            }
+
+            return response;
+        }
+
+        public async Task<ServiceResponse<bool>> UpdateTableAsync(TablesDto table)
+        {
+            var response = new ServiceResponse<bool>();
+            try
+            {
+                var existingtabe = await _tablerepo.GetSingleAsync(table.Id);
+
+                if (existingtabe != null) 
+                {
+                   
+                    existingtabe.Id = table.Id;
+                    existingtabe.TableNumber = table.TableNumber;
+                    existingtabe.NumberOfSeats= table.NumberOfSeats;
+                    existingtabe.isAvialable = table.isAvialable;
+
+
+                    await _tablerepo.UpdateTableAsync(existingtabe);
+
+                    response.Data = true;
+                    response.Success = true;
+                    response.Message = Messages.TableUpdateSucces;
+
+
+                }
+                else
+                {
+                    response.Data = false;
+                    response.Success = false;
+                    response.Message = Messages.TableUpdateFailed;
+                }
+            }
+            catch
+            {
+                response.Data = false;
+                response.Success= false;
+                response.Message = Messages.TableUpdateFailed;
+            }
+
+            return response;
         }
     }
 }

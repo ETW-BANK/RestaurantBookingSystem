@@ -1,4 +1,5 @@
 ﻿using Restaurant.Models.DTOs;
+using Restaurant.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Restaurant.Data.Access.Repository.Services.IServices
 {
    public interface ITableService
     {
-        Task AddItemAsync(TablesDto item);
-        Task<TablesDto> GetSingleAsync(int id);
-        Task<IEnumerable<TablesDto>> GetAllAsync();
-        Task RemoveAsync(int id);
-        Task UpdateTableAsync(TablesDto table);
+        Task<ServiceResponse<string>> AddItemAsync(TablesDto item);
+        Task<ServiceResponse<TablesDto>> GetSingleAsync(int id);
+        Task<ServiceResponse<IEnumerable<TablesDto>>> GetAllAsync();
+        Task<ServiceResponse<bool>> RemoveAsync(int id);
+        Task<ServiceResponse<bool>> UpdateTableAsync(TablesDto table);
     }
 }

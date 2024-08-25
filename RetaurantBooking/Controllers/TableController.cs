@@ -18,37 +18,44 @@ namespace RetaurantBooking.Controllers
 
         [HttpGet]
         [Route("GetOneTable")]
-        public async Task<IActionResult> GetCustomer(int id)
+        public async Task<IActionResult> GetTable(int id)
         {
-            var tableDto = await _tableService.GetSingleAsync(id);
-            if (tableDto == null)
+            var result = await _tableService.GetSingleAsync(id);
+
+            if (!result.Success)
             {
-                return NotFound("user Dosn't Exist");
+                return NotFound(result.Message);
             }
-            return Ok(tableDto);
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("GetAllTables")]
-        public async Task<IActionResult> GetAllCustomers()
+        public async Task<IActionResult> GetAllTables()
         {
-            var tableDto = await _tableService.GetAllAsync();
-            if (tableDto == null)
+            var result = await _tableService.GetAllAsync();
+
+            if (!result.Success)
             {
-                return NotFound("No Customer Found");
+                return NotFound(result.Message);
             }
-            return Ok(tableDto);
+            return Ok(result);
         }
 
 
         [HttpPost]
         [Route("Create Table")]
 
-        public async Task<IActionResult> CreateNweCustomer([FromQuery] TablesDto table)
+        public async Task<IActionResult> CreateTable([FromQuery] TablesDto table)
         {
-            await _tableService.AddItemAsync(table);
+            var result=await _tableService.AddItemAsync(table);
+
+            if(!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
             
-            return Ok("Table Created Succesfully");
+            return Ok(result.Message);
         }
 
         [HttpPut]
@@ -58,17 +65,14 @@ namespace RetaurantBooking.Controllers
 
         {
 
-            var result=await _tableService.GetSingleAsync(table.Id);   
+            var result = await _tableService.UpdateTableAsync(table);
 
-          if (result== null)
+            if (!result.Success)
             {
-                return NotFound("Table Not Found");
+                return BadRequest(result.Message);
             }
 
-             await _tableService.UpdateTableAsync(table);
-            
-
-            return Ok("Table Updated SuccessFully");
+            return Ok(result.Message);
 
         }
 
@@ -79,10 +83,15 @@ namespace RetaurantBooking.Controllers
 
         {
 
-            await _tableService.RemoveAsync(id); 
+           var result= await _tableService.RemoveAsync(id); 
+
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
 
 
-            return Ok("Table Deleted Successfully");
+            return Ok(result.Message);
 
         }
     }
