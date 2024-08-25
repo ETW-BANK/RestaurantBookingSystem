@@ -14,7 +14,12 @@ namespace Restaurant.Models.DTOs
         public int NumberOfGuests { get; set; }
         public int CustomerId { get; set; }
         public int TablesId { get; set; }
-        public int? FoodMenuId { get; set; }
+        public int FoodMenuId { get; set; }
+
+        public CustomerDto Customer { get; set; }
+        public FoodMenuDto FoodMenu { get; set; }
+
+        public TablesDto Tables { get; set; }  
 
     }
 }

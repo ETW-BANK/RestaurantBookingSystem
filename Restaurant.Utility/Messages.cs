@@ -25,10 +25,12 @@ namespace Restaurant.Utility
         public const string MenuUpdateFailed = "Faild To Update Manu";
 
 
-        public const string BookingSucces = "Manu Created Succesfully";
-        public const string BookingFailed = "Faild To Create Menu";
-        public const string BookingUpdateSucces = "Menu Updated Succesfully";
-        public const string BookingUpdateFailed = "Faild To Update Manu";
+        public const string BookingSucces = "Booking Created Succesfully";
+        public const string BookingFailed = "Faild To Create Booking";
+        public const string BookingUpdateSucces = "Booking Updated Succesfully";
+        public const string BookingUpdateFailed = "Faild To Update Booking";
+        public const string BookingCreationFailed = "No Table Avilabe on the Selected Date and time";
+
 
         public const string BookingTableFailed = "No Table Avialable";
 

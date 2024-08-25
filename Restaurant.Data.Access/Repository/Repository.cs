@@ -4,6 +4,7 @@ using Restaurant.Data.Access.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,18 @@ namespace Restaurant.Data.Access.Repository
 
             return await query.ToListAsync();
 
+        }
+
+        public async Task<IEnumerable<T>> GetAllBookingAsync(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = dbSet;
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<T> GetSingleAsync(int id)
