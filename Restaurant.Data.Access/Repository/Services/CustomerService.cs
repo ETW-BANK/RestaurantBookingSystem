@@ -67,20 +67,29 @@ namespace Restaurant.Data.Access.Repository.Services
             {
                 var customers = await _customerRepo.GetAllAsync();
 
-
-                var customerList = customers.Select(c => new CustomerDto
+                if (customers != null)
                 {
-                    Id = c.Id,
-                    FirstName = c.FirstName,
-                    LasttName = c.LasttName,
-                    Email = c.Email,
-                    Phone = c.Phone
-                }).ToList();
+                    var customerList = customers.Select(c => new CustomerDto
+                    {
+                        Id = c.Id,
+                        FirstName = c.FirstName,
+                        LasttName = c.LasttName,
+                        Email = c.Email,
+                        Phone = c.Phone
+                    }).ToList();
 
 
-                response.Data = customerList;
-                response.Success = true;
+                    response.Data = customerList;
+                    response.Success = true;
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Message = Messages.NoData;
+                }
+
             }
+             
             catch
             {
                 response.Success = false;
