@@ -90,6 +90,7 @@ public class BookingService : IBookingService
                     NumberOfGuests = u.NumberOfGuests,
                     TablesId = u.Tables?.Id ?? 0,
                     CustomerId = u.Customer?.Id ?? 0,
+ 
                     FoodMenuId = u.FoodMenu?.Id ?? 0,
                     Customer = u.Customer != null ? new CustomerDto
                     {
@@ -160,26 +161,6 @@ public class BookingService : IBookingService
 
     public async Task<ServiceResponse<bool>> UpdateBookingAsync(BookingDto bookingDto)
     {
-        var response = new ServiceResponse<bool>();
-
-        try
-        {
-            var booking = new Booking
-            {
-                // Map properties from BookingDto to Booking
-            };
-
-            await _bookingRepo.UpdateBookingAsync(booking);
-            response.Data = true;
-            response.Success = true;
-        }
-        catch (Exception ex)
-        {
-            response.Data = false;
-            response.Success = false;
-            response.Message = ex.Message;
-        }
-
-        return response;
+        throw new NotImplementedException();
     }
 }
