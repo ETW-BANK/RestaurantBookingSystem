@@ -13,7 +13,7 @@ namespace Restaurant.Data.Access.Repository.Services.IServices
   public interface IBookingService
     {
 
-        Task<ServiceResponse<string>> AddItemAsync(BookingDto item, params Expression<Func<Booking, object>>[] ?includes);
+        Task<ServiceResponse<string>> AddItemAsync(BookingCreateDto item);
         Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[] ?includes);
         Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllAsync(params Expression<Func<Booking, object>>[] includes);
        

@@ -8,18 +8,67 @@ using System.Linq.Expressions;
 public class BookingService : IBookingService
 {
     private readonly IBookngRepository _bookingRepo;
+    private readonly ITableRepository _tableRepo;
 
-    public BookingService(IBookngRepository bookingRepo)
+    public BookingService(IBookngRepository bookingRepo, ITableRepository tableRepo)
     {
         _bookingRepo = bookingRepo;
+        _tableRepo = tableRepo;
     }
 
-    public Task<ServiceResponse<string>> AddItemAsync(BookingDto item, params Expression<Func<Booking, object>>[]? includes)
+
+    public async Task<ServiceResponse<string>> AddItemAsync(BookingCreateDto item)
     {
-        throw new NotImplementedException();
+        var response = new ServiceResponse<string>();
+
+        try
+        {
+          
+            var table = await _tableRepo.GetSingleAsync(item.TablesId);
+            if (table == null)
+            {
+                response.Success = false;
+                response.Message = Messages.BookingTableNotFound;
+                return response;
+            }
+        
+
+            var newBooking = new Booking
+            {
+                Id = item.Id,
+                FoodMenuId = item.FoodMenuId,
+                CustomerId = item.CustomerId,
+                TablesId = item.TablesId,
+                BookingDate = item.BookingDate,
+                NumberOfGuests = item.NumberOfGuests,
+                Tables = table
+            };
+
+            if ( newBooking.NumberOfGuests > newBooking.Tables.NumberOfSeats)
+            {
+                response.Success = false;
+                response.Message = Messages.BookingTableLimit;
+                return response;
+            }
+
+            await _bookingRepo.AddItemAsync(newBooking);
+            await _bookingRepo.SaveAsync();
+
+            response.Data = newBooking.Id.ToString();
+            response.Success = true;
+            response.Message = Messages.BookingSucces;
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+        }
+
+        return response;
     }
 
-   
+
+
 
     public async Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllAsync(params Expression<Func<Booking, object>>[] includes)
     {

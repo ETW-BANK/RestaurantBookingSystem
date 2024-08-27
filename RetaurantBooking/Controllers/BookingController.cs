@@ -48,7 +48,7 @@ namespace RetaurantBooking.Controllers
         [HttpPost]
         [Route("CreateBooking")]
 
-        public async Task<IActionResult> CreateNweBooking([FromQuery] BookingDto booking)
+        public async Task<IActionResult> CreateNweBooking([FromQuery] BookingCreateDto booking)
         {
       
             var response = await _bookingService.AddItemAsync(booking);

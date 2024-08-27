@@ -9,7 +9,7 @@ namespace Restaurant.Data.Access.Repository.IRepository
 {
     public interface IRepository<T> where T : class
     {
-        Task AddItemAsync(T item, params Expression<Func<T, object>>[] includes);
+        Task AddItemAsync(T item);
 
         Task <T> GetSingleAsync(int id, params Expression<Func<T, object>>[] includes);
 

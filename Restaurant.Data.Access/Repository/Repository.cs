@@ -22,7 +22,7 @@ namespace Restaurant.Data.Access.Repository
             _context = context;
             this.dbSet = _context.Set<T>();
         }
-        public async Task AddItemAsync(T item, params Expression<Func<T, object>>[] includes)
+        public async Task AddItemAsync(T item/*, params Expression<Func<T, object>>[] include*//*s*/)
         {
             await dbSet.AddAsync(item);
         }

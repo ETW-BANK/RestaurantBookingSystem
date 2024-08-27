@@ -30,6 +30,8 @@ namespace Restaurant.Utility
         public const string BookingUpdateSucces = "Booking Updated Succesfully";
         public const string BookingUpdateFailed = "Faild To Update Booking";
         public const string BookingCreationFailed = "No Table Avilabe on the Selected Date and time";
+        public const string BookingTableLimit = "Table Can Not Accomodate the Number of Guests";
+        public const string BookingTableNotFound = "Table Not Found";
 
 
         public const string BookingTableFailed = "No Table Avialable";
