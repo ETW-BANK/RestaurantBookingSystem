@@ -9,11 +9,13 @@ public class BookingService : IBookingService
 {
     private readonly IBookngRepository _bookingRepo;
     private readonly ITableRepository _tableRepo;
+    private readonly ICustomerRepository _customerRepo;
 
-    public BookingService(IBookngRepository bookingRepo, ITableRepository tableRepo)
+    public BookingService(IBookngRepository bookingRepo, ITableRepository tableRepo,ICustomerRepository customerRepo)
     {
         _bookingRepo = bookingRepo;
         _tableRepo = tableRepo;
+        _customerRepo = customerRepo;
     }
 
 
@@ -133,9 +135,50 @@ public class BookingService : IBookingService
         return response;
     }
 
-    public Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[]? includes)
+    public async Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[]? includes)
     {
-        throw new NotImplementedException();
+        var response = new ServiceResponse<BookingDto>();
+
+        try
+        {
+            var singlebooking = await _bookingRepo.GetSingleAsync(id, b => b.Customer,
+         b => b.Tables,
+         b => b.FoodMenu);
+
+            if (singlebooking != null)
+            {
+                response.Data = new BookingDto
+                {
+                    Id = singlebooking.Id,
+                    BookingDate = singlebooking.BookingDate,
+                    TablesId = singlebooking.TablesId,
+                    CustomerId = singlebooking.CustomerId,
+
+                    Customer = singlebooking.Customer != null ? new CustomerDto
+                    {
+                        Id = singlebooking.Customer.Id,
+                        FirstName = singlebooking.Customer.FirstName,
+                        LasttName = singlebooking.Customer.LasttName,
+                    } : null,
+                };
+                response.Success = true;
+                response.Message =Messages.BookingRetrival;
+            }
+            else
+            {
+                response.Success = false;
+                response.Message = Messages.NoData;
+            }
+        }
+        catch 
+        {
+          
+
+            response.Success = false;
+            response.Message = Messages.BookingFailed;
+        }
+
+        return response;
     }
 
     public async Task<ServiceResponse<bool>> RemoveAsync(int id)

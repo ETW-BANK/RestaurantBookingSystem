@@ -35,6 +35,8 @@ namespace Restaurant.Utility
 
 
         public const string BookingTableFailed = "No Table Avialable";
+        public const string BookingRetrival = "Booking Retreved Sucessfully";
+
 
 
         public const string DataDelete = "Entry Deleted Succesfully";
