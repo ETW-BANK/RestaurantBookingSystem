@@ -14,7 +14,7 @@ namespace Restaurant.Data.Access.Repository.Services.IServices
     {
 
         Task<ServiceResponse<string>> AddItemAsync(BookingCreateDto item);
-        Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[] ?includes);
+        Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[] includes);
         Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllAsync(params Expression<Func<Booking, object>>[] includes);
        
         Task<ServiceResponse<bool>> RemoveAsync(int id);

@@ -135,34 +135,55 @@ public class BookingService : IBookingService
         return response;
     }
 
-    public async Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[]? includes)
+    public async Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[] includes)
     {
         var response = new ServiceResponse<BookingDto>();
 
         try
         {
-            var singlebooking = await _bookingRepo.GetSingleAsync(id, b => b.Customer,
-         b => b.Tables,
-         b => b.FoodMenu);
+           
+            var singleBooking = await _bookingRepo.GetSingleAsync(id, b => b.Customer, b => b.Tables, b => b.FoodMenu);
 
-            if (singlebooking != null)
+            if (singleBooking != null)
             {
+              
+                Console.WriteLine($"Booking: {singleBooking}");
+                Console.WriteLine($"Customer: {singleBooking.Customer}");
+
+                var customer = singleBooking.Customer;
+
                 response.Data = new BookingDto
                 {
-                    Id = singlebooking.Id,
-                    BookingDate = singlebooking.BookingDate,
-                    TablesId = singlebooking.TablesId,
-                    CustomerId = singlebooking.CustomerId,
-
-                    Customer = singlebooking.Customer != null ? new CustomerDto
+                    Id = singleBooking.Id,
+                    BookingDate = singleBooking.BookingDate,
+                    TablesId = singleBooking.TablesId,
+                    CustomerId = singleBooking.CustomerId,
+                    Customer = singleBooking.Customer != null ? new CustomerDto
                     {
-                        Id = singlebooking.Customer.Id,
-                        FirstName = singlebooking.Customer.FirstName,
-                        LasttName = singlebooking.Customer.LasttName,
+                        Id = singleBooking.Customer.Id,
+                        FirstName = singleBooking.Customer.FirstName,
+                        LasttName = singleBooking.Customer.LasttName,
+                        Email = singleBooking.Customer.Email,
+                        Phone = singleBooking.Customer.Phone
                     } : null,
+                    Tables = singleBooking.Tables != null ? new TablesDto
+                    {
+                        Id = singleBooking.Tables.Id,
+                        TableNumber = singleBooking.Tables.TableNumber,
+                        NumberOfSeats = singleBooking.Tables.NumberOfSeats,
+                        isAvialable = singleBooking.Tables.isAvialable
+                    } : null,
+                    FoodMenu = singleBooking.FoodMenu != null ? new FoodMenuDto
+                    {
+                        Id = singleBooking.FoodMenu.Id,
+                        Title = singleBooking.FoodMenu.Title,
+                        ImageUrl = singleBooking.FoodMenu.ImageUrl,
+                        IsAvailable = singleBooking.FoodMenu.IsAvailable
+                    } : null
                 };
+
                 response.Success = true;
-                response.Message =Messages.BookingRetrival;
+                response.Message = Messages.BookingRetrival;
             }
             else
             {
@@ -170,9 +191,10 @@ public class BookingService : IBookingService
                 response.Message = Messages.NoData;
             }
         }
-        catch 
+        catch (Exception ex)
         {
-          
+           
+            Console.WriteLine($"Exception: {ex.Message}");
 
             response.Success = false;
             response.Message = Messages.BookingFailed;
@@ -180,6 +202,9 @@ public class BookingService : IBookingService
 
         return response;
     }
+
+
+
 
     public async Task<ServiceResponse<bool>> RemoveAsync(int id)
     {

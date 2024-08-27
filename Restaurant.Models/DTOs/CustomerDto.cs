@@ -24,5 +24,7 @@ namespace Restaurant.Models.DTOs
        
 
         public string Phone { get; set; }
+
+        public Booking Booking { get; set; }
     }
 }

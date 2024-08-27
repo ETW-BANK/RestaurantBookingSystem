@@ -27,9 +27,9 @@ namespace Restaurant.Data.Access.Repository
             await dbSet.AddAsync(item);
         }
 
-        
 
-        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] ?includes)
+
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[]? includes)
         {
             IQueryable<T> query = dbSet;
 
@@ -43,15 +43,20 @@ namespace Restaurant.Data.Access.Repository
 
         public async Task<T> GetSingleAsync(int id, params Expression<Func<T, object>>[] includes)
         {
+            IQueryable<T> query = dbSet;
 
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
 
-            T entity = await dbSet.FindAsync(id);
-
-          
+            T entity = await query.FirstOrDefaultAsync();
 
             return entity;
-
         }
+    
+
+    
 
         public async Task RemoveAsync(int id)
         {
