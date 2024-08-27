@@ -18,6 +18,6 @@ namespace Restaurant.Data.Access.Repository.Services.IServices
         Task<ServiceResponse<IEnumerable<BookingDto>>> GetAllAsync(params Expression<Func<Booking, object>>[] includes);
        
         Task<ServiceResponse<bool>> RemoveAsync(int id);
-        Task<ServiceResponse<bool>> UpdateBookingAsync(BookingDto booking);
+        Task<ServiceResponse<bool>> UpdateBookingAsync(BookingCreateDto booking);
     }
 }

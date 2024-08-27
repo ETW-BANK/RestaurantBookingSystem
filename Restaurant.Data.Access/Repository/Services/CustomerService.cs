@@ -184,6 +184,7 @@ namespace Restaurant.Data.Access.Repository.Services
             try
             {
                 var existingCustomer = await _customerRepo.GetSingleAsync(customer.Id);
+               
 
                 if (existingCustomer != null)
                 {

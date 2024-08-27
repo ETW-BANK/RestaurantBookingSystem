@@ -69,7 +69,7 @@ namespace RetaurantBooking.Controllers
 
         [HttpPut]
         [Route("UpdateBooking")]
-        public async Task<IActionResult> Update([FromQuery] BookingDto booking)
+        public async Task<IActionResult> Update([FromQuery] BookingCreateDto booking)
         {
 
             var result = await _bookingService.UpdateBookingAsync(booking);
