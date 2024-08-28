@@ -21,5 +21,7 @@ namespace Restaurant.Models.DTOs
 
         public TablesDto? Tables { get; set; }
 
+      
+
     }
 }

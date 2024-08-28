@@ -12,11 +12,12 @@ public class BookingService : IBookingService
     private readonly ICustomerRepository _customerRepo;
     private readonly IFoodMenuRepository _fooRepo;
 
-    public BookingService(IBookngRepository bookingRepo, ITableRepository tableRepo, ICustomerRepository customerRepo)
+    public BookingService(IBookngRepository bookingRepo, ITableRepository ?tableRepo, ICustomerRepository? customerRepo,IFoodMenuRepository fooRepo)
     {
         _bookingRepo = bookingRepo;
         _tableRepo = tableRepo;
         _customerRepo = customerRepo;
+        _fooRepo = fooRepo; 
     }
 
 
@@ -136,38 +137,41 @@ public class BookingService : IBookingService
         return response;
     }
 
+
+
     public async Task<ServiceResponse<BookingDto>> GetSingleAsync(int id, params Expression<Func<Booking, object>>[] includes)
     {
         var response = new ServiceResponse<BookingDto>();
 
         try
         {
-
+           
             var singleBooking = await _bookingRepo.GetSingleAsync(id, b => b.Customer, b => b.Tables, b => b.FoodMenu);
 
             if (singleBooking != null)
             {
-
                 Console.WriteLine($"Booking: {singleBooking}");
                 Console.WriteLine($"Customer: {singleBooking.Customer}");
 
-                var customer = singleBooking.Customer;
-
+              
                 response.Data = new BookingDto
                 {
-                    Id = singleBooking.Id,
+                    Id = singleBooking.Id,  
                     BookingDate = singleBooking.BookingDate,
                     TablesId = singleBooking.TablesId,
                     CustomerId = singleBooking.CustomerId,
                     NumberOfGuests = singleBooking.NumberOfGuests,
+
                     Customer = singleBooking.Customer != null ? new CustomerDto
                     {
                         Id = singleBooking.Customer.Id,
                         FirstName = singleBooking.Customer.FirstName,
-                        LasttName = singleBooking.Customer.LasttName,
+                        LasttName = singleBooking.Customer.LasttName,  
                         Email = singleBooking.Customer.Email,
                         Phone = singleBooking.Customer.Phone
                     } : null,
+
+                  
                     Tables = singleBooking.Tables != null ? new TablesDto
                     {
                         Id = singleBooking.Tables.Id,
@@ -175,11 +179,12 @@ public class BookingService : IBookingService
                         NumberOfSeats = singleBooking.Tables.NumberOfSeats,
                         isAvialable = singleBooking.Tables.isAvialable
                     } : null,
+
                     FoodMenu = singleBooking.FoodMenu != null ? new FoodMenuDto
                     {
                         Id = singleBooking.FoodMenu.Id,
                         Title = singleBooking.FoodMenu.Title,
-                        price = singleBooking.FoodMenu.Price,
+                        price = singleBooking.FoodMenu.Price,  
                         ImageUrl = singleBooking.FoodMenu.ImageUrl,
                         IsAvailable = singleBooking.FoodMenu.IsAvailable
                     } : null
@@ -196,16 +201,12 @@ public class BookingService : IBookingService
         }
         catch
         {
-
-
-
             response.Success = false;
             response.Message = Messages.BookingFailed;
         }
 
         return response;
     }
-
 
 
 
@@ -242,7 +243,7 @@ public class BookingService : IBookingService
         return response;
     }
 
-    public async Task<ServiceResponse<bool>> UpdateBookingAsync(BookingCreateDto bookingDto)
+    public async Task<ServiceResponse<bool>> UpdateBookingAsync(BookingCreateDto? bookingDto)
     {
         var response = new ServiceResponse<bool>();
 

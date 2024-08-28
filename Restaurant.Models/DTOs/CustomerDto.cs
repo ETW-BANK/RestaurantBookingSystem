@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Models.DTOs
 {
-   public class CustomerDto
+    public class CustomerDto
     {
 
-      
+
         public int Id { get; set; }
 
-        
+
         public string FirstName { get; set; }
 
-       
+
         public string LasttName { get; set; }
 
         public string Email { get; set; }
 
-       
+
 
         public string Phone { get; set; }
 
-        public Booking Booking { get; set; }
+
     }
 }

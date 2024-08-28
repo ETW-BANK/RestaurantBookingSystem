@@ -50,7 +50,7 @@ namespace Restaurant.Data.Access.Repository
                 query = query.Include(include);
             }
 
-            T entity = await query.FirstOrDefaultAsync();
+            T? entity = await query.FirstOrDefaultAsync(e => EF.Property<int>(e, "Id") == id);
 
             return entity;
         }
