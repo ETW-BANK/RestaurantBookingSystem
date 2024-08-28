@@ -35,7 +35,12 @@ public class BookingService : IBookingService
                 response.Message = Messages.BookingTableNotFound;
                 return response;
             }
-
+            else if (table.isAvialable == false)
+            {
+                response.Success = false;
+                response.Message = Messages.BookingTableFailed;
+                return response;
+            }
 
             var newBooking = new Booking
             {
@@ -54,8 +59,13 @@ public class BookingService : IBookingService
                 response.Message = Messages.BookingTableLimit;
                 return response;
             }
+            
+         
+           
+           
 
             await _bookingRepo.AddItemAsync(newBooking);
+            newBooking.Tables.isAvialable = false;
             await _bookingRepo.SaveAsync();
 
             response.Data = newBooking.Id.ToString();
@@ -150,8 +160,7 @@ public class BookingService : IBookingService
 
             if (singleBooking != null)
             {
-                Console.WriteLine($"Booking: {singleBooking}");
-                Console.WriteLine($"Customer: {singleBooking.Customer}");
+                
 
               
                 response.Data = new BookingDto
