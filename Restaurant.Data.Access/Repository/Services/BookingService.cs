@@ -38,7 +38,7 @@ public class BookingService : IBookingService
             else if (table.isAvialable == false)
             {
                 response.Success = false;
-                response.Message = Messages.BookingTableFailed;
+                response.Message = Messages.BookingTableNotAvailable;
                 return response;
             }
 

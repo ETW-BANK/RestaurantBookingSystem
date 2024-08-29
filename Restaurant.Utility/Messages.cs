@@ -32,6 +32,7 @@ namespace Restaurant.Utility
         public const string BookingCreationFailed = "No Table Avilabe on the Selected Date and time";
         public const string BookingTableLimit = "Table Can Not Accomodate the Number of Guests";
         public const string BookingTableNotFound = "Table Not Found";
+        public const string BookingTableNotAvailable = "Table is Already Booked,Please choose another Table";
 
 
         public const string BookingTableFailed = "No Table Avialable";
