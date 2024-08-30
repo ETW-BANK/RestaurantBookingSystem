@@ -129,7 +129,9 @@ public class BookingService : IBookingService
                         IsAvailable = u.FoodMenu.IsAvailable
                     } : null
                 }).ToList();
+
                 response.Success = true;
+               
             }
             else
             {
@@ -300,7 +302,7 @@ public class BookingService : IBookingService
 
             response.Data = true;
             response.Success = true;
-            response.Message = Messages.BookingSucces;
+            response.Message = Messages.BookingUpdateSucces;
         }
         catch (Exception ex)
         {

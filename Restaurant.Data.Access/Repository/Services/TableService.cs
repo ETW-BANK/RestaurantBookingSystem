@@ -112,7 +112,7 @@ namespace Restaurant.Data.Access.Repository.Services
 
                     response.Data=tables;    
                     response.Success = true;
-                    response.Message = Messages.TableSucces;
+                    response.Message = Messages.TableRetrive;
 
                 }
                 else

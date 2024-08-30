@@ -18,6 +18,8 @@ namespace Restaurant.Utility
         public const string TableFailed = "Faild To Create Table";
         public const string TableUpdateSucces = "Table Updated Succesfully";
         public const string TableUpdateFailed = "Faild To Update Table";
+        public const string TableRetrive = "Table Retrived Successfully";
+
 
         public const string MenuSucces = "Manu Created Succesfully";
         public const string MenuFailed = "Faild To Create Menu";
