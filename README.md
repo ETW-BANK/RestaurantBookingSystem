@@ -1,3 +1,6 @@
+
+markdown
+Copy code
 # API Documentation
 
 Welcome to the API documentation for the Restaurant Booking System. This README provides detailed information on the available API endpoints, including example requests and responses for various scenarios.
@@ -33,3 +36,66 @@ Welcome to the API documentation for the Restaurant Booking System. This README 
 
 All API requests are made to the base URL:
 
+https://localhost:7232
+
+markdown
+Copy code
+
+## Customer API
+
+### Get All Customers
+
+- **Endpoint:** `GET /api/Customer/GetAllCustomers`
+- **Description:** Retrieve a list of all customers.
+
+**Request:**
+
+GET /api/Customer/GetAllCustomers
+
+json
+Copy code
+
+**Response:**
+
+- **Success (200):**
+
+  ```json
+  {
+    "success": true,
+    "data": [
+      {
+        "id": 2,
+        "firstName": "azerbajan",
+        "lastName": "Girma",
+        "email": "tensaeg@yahoo.com",
+        "phone": "0764525651"
+      },
+      {
+        "id": 3,
+        "firstName": "ethiopia",
+        "lastName": "Girma",
+        "email": "tensaeg@yahoo.com",
+        "phone": "0764525651"
+      }
+    ]
+  }
+Create Customer
+Endpoint: POST /api/Customer/CreateCustomer
+Description: Create a new customer.
+Request:
+
+bash
+Copy code
+POST /api/Customer/CreateCustomer?FirstName=yohannes&LastName=girma&Email=tensaeg%40yahoo.com&Phone=0764525651
+Response:
+
+Success (200):
+
+json
+Copy code
+{
+  "message": "Customer created successfully"
+}
+Update Customer
+Endpoint: PUT /api/Customer/UpdateCustomer
+Description: Update an existing customer.
