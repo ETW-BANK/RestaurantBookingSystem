@@ -2,23 +2,30 @@ API Documentation
 Welcome to the API documentation for Restaurant Booking System. This README provides detailed information on the available API endpoints, including example requests and responses for various scenarios.
 Table of Contents
 1.	Base URL
+   
 2.	Customer API
+   
 o	Get All Customers
 o	Create Customer
 o	Update Customer
 o	Delete Customer
+
 3.	Food Menu API
+   
 o	Get Single Menu Item
 o	Get All Menu Items
 o	Create Menu Item
 o	Update Menu Item
 o	Delete Menu Item
+
 4.	Table API
+   
 o	Get Single Table
 o	Get All Tables
 o	Create Table
 o	Update Table
 o	Delete Table
+
 5.	Booking API
 
 o	Get Single Booking
@@ -36,6 +43,7 @@ o	Delete Booking
 
 Base URL
 All API requests are made to the base URL:
+
 https://localhost:7232
 
 Customer API
