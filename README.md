@@ -80,8 +80,7 @@ GET /api/Customer/GetSingleCustomer?id=7
 **Request:**
 GET /api/Customer/GetAllCustomers
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -116,8 +115,7 @@ Copy code
 **Request:**
 POST /api/Customer/CreateCustomer?FirstName=yohannes&LasttName=girma&Email=tensaeg%40yahoo.com&Phone=0764525651
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -136,8 +134,7 @@ Copy code
 **Request:**
 PUT /api/Customer/UpdateCustomer?Id=8&FirstName=mariza&LasttName=roberto&Email=mariza%40yahoo.com&Phone=111111111111
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -163,8 +160,7 @@ Copy code
 **Request:**
 DELETE /api/Customer/DeleteCustomer?id=12
 
-ruby
-Copy code
+
 
 **Response:**
 
@@ -192,8 +188,7 @@ Copy code
 **Request:**
 GET /api/FoodMenu/GetSingleMenu?id=3
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -226,8 +221,7 @@ Copy code
 **Request:**
 GET /api/FoodMenu/GetAllMenues
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -263,8 +257,7 @@ Copy code
 **Request:**
 POST /api/FoodMenu/CreateMenue?Title=enjera&price=500&IsAvailable=true&ImageUrl=https%3A%2F%2Flp-cms-production.imgix.net%2F2020-11%2FInjera.jpg%3Fauto%3Dformat%26fit%3Dcrop%26sharp%3D10%26vib%3D20%26ixlib%3Dreact-8.6.4%26w%3D850%26q%3D20%26dpr%3D5
 
-mathematica
-Copy code
+
 
 **Response:**
 
@@ -298,8 +291,7 @@ Copy code
 **Request:**
 PUT /api/FoodMenu/UpdateMenu?Id=3&Title=areke&price=455&IsAvailable=true
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -326,8 +318,7 @@ Copy code
 **Request:**
 DELETE /api/FoodMenu/DeleteMenu?id=4
 
-markdown
-Copy code
+
 
 **Response:**
 
