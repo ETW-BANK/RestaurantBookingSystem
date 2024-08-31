@@ -36,8 +36,7 @@ All API requests are made to the base URL:
 
 https://localhost:7232
 
-markdown
-Copy code
+
 
 ## Customer API
 ### Get Single Customer
@@ -48,8 +47,7 @@ Copy code
 **Request:**
 GET /api/Customer/GetSingleCustomer?id=7
 
-json
-Copy code
+
 
 **Response:**
 
