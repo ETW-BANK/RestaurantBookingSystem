@@ -6,23 +6,24 @@ Welcome to the API documentation for the Restaurant Booking System. This documen
 
 1. [Base URL](#base-url)
 2. [Customer API](#customer-api)
+   - [Get Single Customer](#get-single-customer)
    - [Get All Customers](#get-all-customers)
    - [Create Customer](#create-customer)
    - [Update Customer](#update-customer)
    - [Delete Customer](#delete-customer)
-3. [Food Menu API](#food-menu-api)
+4. [Food Menu API](#food-menu-api)
    - [Get Single Menu Item](#get-single-menu-item)
    - [Get All Menu Items](#get-all-menu-items)
    - [Create Menu Item](#create-menu-item)
    - [Update Menu Item](#update-menu-item)
    - [Delete Menu Item](#delete-menu-item)
-4. [Table API](#table-api)
+5. [Table API](#table-api)
    - [Get Single Table](#get-single-table)
    - [Get All Tables](#get-all-tables)
    - [Create Table](#create-table)
    - [Update Table](#update-table)
    - [Delete Table](#delete-table)
-5. [Booking API](#booking-api)
+6. [Booking API](#booking-api)
    - [Get Single Booking](#get-single-booking)
    - [Get All Bookings](#get-all-bookings)
    - [Create Booking](#create-booking)
@@ -39,7 +40,40 @@ markdown
 Copy code
 
 ## Customer API
+### Get Single Customer
 
+- **Endpoint:** `GET /api/Customer/GetSingleCustomer`
+- **Description:** Retrieve a single customer by their ID.
+
+**Request:**
+GET /api/Customer/GetSingleCustomer?id=7
+
+json
+Copy code
+
+**Response:**
+
+- **Success (200):**
+    ```json
+    {
+      "success": true,
+      "data": {
+        "id": 7,
+        "firstName": "edom",
+        "lasttName": "Girma",
+        "email": "tensaeg@yahoo.com",
+        "phone": "0764525651"
+      },
+      "message": null
+    }
+    ```
+
+- **Error (404):**
+    ```json
+    {
+      "message": "No Data Found"
+    }
+    ```
 ### Get All Customers
 
 - **Endpoint:** `GET /api/Customer/GetAllCustomers`
