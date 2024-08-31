@@ -103,3 +103,55 @@ Copy code
   {
    "message": "Customer created successfully",
   }
+  
+  ### Update Customer
+
+- **Endpoint:** Endpoint:  PUT /api/Customer/UpdateCustomer
+- **Description:**  Update an existing customer.
+.
+
+**Request:**
+
+PUT
+/api/Customer/UpdateCustomer?
+Id=8&FirstName=mariza&LasttName=roberto&Email=mariza%40yahoo.com&Phone=111111111111
+
+json
+Copy code
+
+**Response:**
+
+- **Success (200):**
+
+  ```json
+ {
+ "message": "Customer updated successfully"
+}
+ **Error (404):**
+{
+ "message": " No Data Found" (if no data for the customer with the given -id)
+}
+
+
+### Delete Customer
+- **Endpoint:** DELETE /api/Customer/DeleteCustomer
+- **Description:** Delete a customer by their ID.
+
+**Request:**http
+DELETE 
+/api/Customer/DeleteCustomer?id=12
+json
+Copy code
+
+**Response:**
+
+- **Success (200):**
+
+  ```json
+{
+  "message": "Entry deleted successfully"
+}
+**Error (404):**
+{
+  "message": " No Data Found" (if no data for the customer with the given -id)
+}
