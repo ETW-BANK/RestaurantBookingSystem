@@ -124,9 +124,9 @@ Copy code
 - **Success (200):**
 
   ```json
- {
- "message": "Customer updated successfully"
-}
+  {
+   "message": "Customer Updated successfully",
+  }
  **Error (404):**
 {
  "message": " No Data Found" (if no data for the customer with the given -id)
@@ -151,6 +151,7 @@ Copy code
 {
   "message": "Entry deleted successfully"
 }
+
 **Error (404):**
 {
   "message": " No Data Found" (if no data for the customer with the given -id)
