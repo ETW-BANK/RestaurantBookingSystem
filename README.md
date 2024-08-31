@@ -126,7 +126,7 @@ Copy code
   ```json
   {
    "message": "Customer Updated successfully",
-  }
+  },
  **Error (404):**
 {
  "message": " No Data Found" (if no data for the customer with the given -id)
