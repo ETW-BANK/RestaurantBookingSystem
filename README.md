@@ -78,12 +78,45 @@ Copy code
       }
     ]
   }
-### Get All Customers
-- **Endpoint:** POST /api/Customer/CreateCustomer
+Get All Customers
+Endpoint: GET /api/Customer/GetAllCustomers
+Description: Retrieve a list of all customers.
+Request:
+
+http
+Copy code
+GET /api/Customer/GetAllCustomers
+Response:
+
+Success (200):
+
+json
+Copy code
+{
+  "success": true,
+  "data": [
+    {
+      "id": 2,
+      "firstName": "azerbajan",
+      "lastName": "Girma",
+      "email": "tensaeg@yahoo.com",
+      "phone": "0764525651"
+    },
+    {
+      "id": 3,
+      "firstName": "ethiopia",
+      "lastName": "Girma",
+      "email": "tensaeg@yahoo.com",
+      "phone": "0764525651"
+    }
+  ]
+}
+Create Customer
+Endpoint: POST /api/Customer/CreateCustomer
 Description: Create a new customer.
 Request:
 
-bash
+http
 Copy code
 POST /api/Customer/CreateCustomer?FirstName=yohannes&LastName=girma&Email=tensaeg%40yahoo.com&Phone=0764525651
 Response:
@@ -100,7 +133,7 @@ Endpoint: PUT /api/Customer/UpdateCustomer
 Description: Update an existing customer.
 Request:
 
-bash
+http
 Copy code
 PUT /api/Customer/UpdateCustomer?Id=8&FirstName=mariza&LastName=roberto&Email=mariza%40yahoo.com&Phone=111111111111
 Response:
@@ -124,7 +157,7 @@ Endpoint: DELETE /api/Customer/DeleteCustomer
 Description: Delete a customer by their ID.
 Request:
 
-bash
+http
 Copy code
 DELETE /api/Customer/DeleteCustomer?id=12
 Response:
