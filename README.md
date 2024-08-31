@@ -346,8 +346,7 @@ DELETE /api/FoodMenu/DeleteMenu?id=4
 **Request:**
 GET /api/Table/GetSingleTable?id=3
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -380,8 +379,7 @@ Copy code
 **Request:**
 GET /api/Table/GetAllTables
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -428,8 +426,7 @@ Copy code
 **Request:**
 POST /api/Table/CreateTable?TableNumber=33&NumberOfSeats=5&isAvialable=true
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -448,8 +445,7 @@ Copy code
 **Request:**
 PUT /api/Table/UpdateTable?Id=6&TableNumber=10&NumberOfSeats=6&isAvialable=true
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -475,8 +471,7 @@ Copy code
 **Request:**
 DELETE /api/Table/DeleteTable?id=6
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -504,8 +499,7 @@ Copy code
 **Request:**
 GET /api/Booking/GetSingleBooking?id=6
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -560,8 +554,7 @@ Copy code
 **Request:**
 GET /api/Booking/GetAllBookings
 
-sql
-Copy code
+
 
 **Response:**
 
@@ -642,8 +635,7 @@ Copy code
 **Request:**
 POST /api/Booking/CreateBooking?BookingDate=2024-08-25%2014%3A30%3A00.0000000&NumberOfGuests=4&CustomerId=2&TablesId=4&FoodMenuId=3
 
-ruby
-Copy code
+
 
 **Response:**
 
@@ -676,8 +668,7 @@ Copy code
 **Request:**
 PUT /api/Booking/UpdateBooking?Id=11&BookingDate=2024-08-25%2014%3A30%3A00.0000000&NumberOfGuests=6&CustomerId=8&TablesId=3&FoodMenuId=3
 
-markdown
-Copy code
+
 
 **Response:**
 
@@ -703,8 +694,7 @@ Copy code
 **Request:**
 DELETE /api/Booking/DeleteBooking?id=103
 
-ruby
-Copy code
+
 
 **Response:**
 
