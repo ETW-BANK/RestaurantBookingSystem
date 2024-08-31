@@ -78,8 +78,8 @@ Copy code
       }
     ]
   }
-Create Customer
-Endpoint: POST /api/Customer/CreateCustomer
+### Get All Customers
+- **Endpoint:** POST /api/Customer/CreateCustomer
 Description: Create a new customer.
 Request:
 
