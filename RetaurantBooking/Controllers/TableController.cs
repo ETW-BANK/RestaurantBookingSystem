@@ -5,7 +5,7 @@ using Restaurant.Models.DTOs;
 
 namespace RetaurantBooking.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class TableController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpGet]
-        [Route("GetSingleTable")]
+     
         public async Task<IActionResult> GetTable(int id)
         {
             var result = await _tableService.GetSingleAsync(id);
@@ -30,7 +30,7 @@ namespace RetaurantBooking.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllTables")]
+      
         public async Task<IActionResult> GetAllTables()
         {
             var result = await _tableService.GetAllAsync();
@@ -44,7 +44,7 @@ namespace RetaurantBooking.Controllers
 
 
         [HttpPost]
-        [Route("CreateTable")]
+     
 
         public async Task<IActionResult> CreateTable([FromQuery] TablesDto table)
         {
@@ -59,7 +59,7 @@ namespace RetaurantBooking.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateTable")]
+    
 
         public async Task<IActionResult> Update([FromQuery] TablesDto table)
 
@@ -77,7 +77,7 @@ namespace RetaurantBooking.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteTable")]
+   
 
         public async Task<IActionResult> DeleteTable(int id)
 
