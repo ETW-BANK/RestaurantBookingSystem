@@ -24,6 +24,6 @@ namespace Restaurant.Models
         [ValidateNever]
         public string? ImageUrl { get; set; }
 
-        public ICollection<Booking>? MenuBooking { get; set; }
+    
     }
 }
